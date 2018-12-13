@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="sembarangkasirModelStoreContainer" CdmEntityContainer="sembarangkasirEntities">
+    <EntitySetMapping Name="master_barang">
+      <EntityTypeMapping TypeName="sembarangkasirModel.master_barang">
+        <MappingFragment StoreEntitySet="master_barang">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nama_barang" ColumnName="nama_barang" />
+          <ScalarProperty Name="jenis_barang" ColumnName="jenis_barang" />
+          <ScalarProperty Name="stock" ColumnName="stock" />
+          <ScalarProperty Name="harga" ColumnName="harga" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="master_restock">
+      <EntityTypeMapping TypeName="sembarangkasirModel.master_restock">
+        <MappingFragment StoreEntitySet="master_restock">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_barang" ColumnName="id_barang" />
+          <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="master_user">
+      <EntityTypeMapping TypeName="sembarangkasirModel.master_user">
+        <MappingFragment StoreEntitySet="master_user">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="transaksi">
+      <EntityTypeMapping TypeName="sembarangkasirModel.transaksi">
+        <MappingFragment StoreEntitySet="transaksi">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_barang" ColumnName="id_barang" />
+          <ScalarProperty Name="tanggal" ColumnName="tanggal" />
+          <ScalarProperty Name="qty" ColumnName="qty" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="uang_transaksi">
+      <EntityTypeMapping TypeName="sembarangkasirModel.uang_transaksi">
+        <MappingFragment StoreEntitySet="uang_transaksi">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_transaksi" ColumnName="id_transaksi" />
+          <ScalarProperty Name="income" ColumnName="income" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

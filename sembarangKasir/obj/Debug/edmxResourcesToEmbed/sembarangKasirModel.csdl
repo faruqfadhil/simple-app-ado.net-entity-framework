@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sembarangkasirModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="master_barang">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nama_barang" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="jenis_barang" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="stock" Type="Int32" />
+    <Property Name="harga" Type="Int32" />
+    <NavigationProperty Name="master_restock" Relationship="Self.FK__master_re__id_ba__145C0A3F" FromRole="master_barang" ToRole="master_restock" />
+    <NavigationProperty Name="transaksi" Relationship="Self.FK__transaksi__id_ba__173876EA" FromRole="master_barang" ToRole="transaksi" />
+  </EntityType>
+  <EntityType Name="master_restock">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_barang" Type="Int32" />
+    <Property Name="tanggal" Type="DateTime" Precision="0" />
+    <Property Name="qty" Type="Int32" />
+    <NavigationProperty Name="master_barang" Relationship="Self.FK__master_re__id_ba__145C0A3F" FromRole="master_restock" ToRole="master_barang" />
+  </EntityType>
+  <EntityType Name="master_user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="transaksi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_barang" Type="Int32" />
+    <Property Name="tanggal" Type="DateTime" Precision="0" />
+    <Property Name="qty" Type="Int32" />
+    <NavigationProperty Name="master_barang" Relationship="Self.FK__transaksi__id_ba__173876EA" FromRole="transaksi" ToRole="master_barang" />
+    <NavigationProperty Name="uang_transaksi" Relationship="Self.FK__uang_tran__id_tr__1A14E395" FromRole="transaksi" ToRole="uang_transaksi" />
+  </EntityType>
+  <EntityType Name="uang_transaksi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_transaksi" Type="Int32" />
+    <Property Name="income" Type="Int32" />
+    <NavigationProperty Name="transaksi" Relationship="Self.FK__uang_tran__id_tr__1A14E395" FromRole="uang_transaksi" ToRole="transaksi" />
+  </EntityType>
+  <Association Name="FK__master_re__id_ba__145C0A3F">
+    <End Role="master_barang" Type="Self.master_barang" Multiplicity="0..1" />
+    <End Role="master_restock" Type="Self.master_restock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="master_barang">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="master_restock">
+        <PropertyRef Name="id_barang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__transaksi__id_ba__173876EA">
+    <End Role="master_barang" Type="Self.master_barang" Multiplicity="0..1" />
+    <End Role="transaksi" Type="Self.transaksi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="master_barang">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="transaksi">
+        <PropertyRef Name="id_barang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__uang_tran__id_tr__1A14E395">
+    <End Role="transaksi" Type="Self.transaksi" Multiplicity="0..1" />
+    <End Role="uang_transaksi" Type="Self.uang_transaksi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="transaksi">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="uang_transaksi">
+        <PropertyRef Name="id_transaksi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="sembarangkasirEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="master_barang" EntityType="Self.master_barang" />
+    <EntitySet Name="master_restock" EntityType="Self.master_restock" />
+    <EntitySet Name="master_user" EntityType="Self.master_user" />
+    <EntitySet Name="transaksi" EntityType="Self.transaksi" />
+    <EntitySet Name="uang_transaksi" EntityType="Self.uang_transaksi" />
+    <AssociationSet Name="FK__master_re__id_ba__145C0A3F" Association="Self.FK__master_re__id_ba__145C0A3F">
+      <End Role="master_barang" EntitySet="master_barang" />
+      <End Role="master_restock" EntitySet="master_restock" />
+    </AssociationSet>
+    <AssociationSet Name="FK__transaksi__id_ba__173876EA" Association="Self.FK__transaksi__id_ba__173876EA">
+      <End Role="master_barang" EntitySet="master_barang" />
+      <End Role="transaksi" EntitySet="transaksi" />
+    </AssociationSet>
+    <AssociationSet Name="FK__uang_tran__id_tr__1A14E395" Association="Self.FK__uang_tran__id_tr__1A14E395">
+      <End Role="transaksi" EntitySet="transaksi" />
+      <End Role="uang_transaksi" EntitySet="uang_transaksi" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
